@@ -1,7 +1,7 @@
 {
-  "name": "CIAAR Tunes",
+  "name": "CIAAR Tunes - EAOF 2026",
   "short_name": "CIAAR Tunes",
-  "description": "App para memorização das canções militares do CIAAR",
+  "description": "Domine as canções militares e tenha noites tranquilas",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0B132B",
