@@ -1,13 +1,235 @@
 const songsData = [
-    { id: '1', title: '01. Bandeirantes do ar', videoId: 'Ph7sa65pLxg' },
-    { id: '2', title: '02. Hino dos aviadores', videoId: 'Vmc0QHk6J1w' },
-    { id: '3', title: '03. Canção da aviação de transporte de tropa', videoId: '3J1BWb56YXs' },
-    { id: '4', title: '04. Hino da aviação embarcada', videoId: 'fIjiZ4SRWcU' },
-    { id: '5', title: '05. Canção da aviação de caça', videoId: 'k2bP8UxGDvM' },
-    { id: '6', title: '06. Canção do especialista', videoId: 'ULvyok063eI' },
-    { id: '7', title: '07. Canção do CIAAR', videoId: 'NhuLs6n62ZY' },
-    { id: '8', title: '08. Canção do expedicionário', videoId: '4ZKVujE5Ot0' },
-    { id: '9', title: '09. Canção da infantaria da aeronáutica', videoId: 'r3lrc1ESfbk' }
+    { 
+        id: '1', 
+        title: '01. Bandeirantes do ar', 
+        videoId: 'Ph7sa65pLxg',
+        lyrics: `I
+A esquadrilha é um punhado de amigos,
+A vibrar, a vibrar de emoção!
+Não tememos da luta os perigos,
+Nem dos céus a infinita amplidão!
+Sobre mares, planícies, sobre montes,
+Viveremos por sempre a voar.
+Bandeirantes de novos horizontes,
+Para a bandeira da Pátria elevar.
+Bandeirantes de novos horizontes,
+Para a suprema conquista do Ar!
+
+ESTRIBILHO
+Nós somos da Força Aérea Brasileira,
+O nosso emblema é a águia altaneira,
+Que há de ser grande, forte e varonil!
+(BIS)
+Lutaremos!!! Morreremos!!!
+Pela Bandeira do Brasil!!!
+
+II
+Entre as nuvens, dos céus vendo a terra,
+Vivem lá os Cadetes do Ar!
+Comandando a grande arma de Guerra,
+Baluarte da Pátria sem par!
+Adestrados ao fogo da metralha,
+E ao governo de seu avião,
+Estarão sempre prontos à batalha,
+Para defesa do nosso pendão.`
+    },
+    { 
+        id: '2', 
+        title: '02. Hino dos aviadores', 
+        videoId: 'Vmc0QHk6J1w',
+        lyrics: `I
+Vamos, filhos altivos dos ares
+Nosso voo ousado alçar,
+Sobre campos, cidades e mares,
+Vamos nuvens e céus enfrentar.
+
+II
+D'astro-rei desafiamos os cimos,
+Bandeirantes audazes do azul.
+Às estrelas, de noite, subimos,
+Para orar ao Cruzeiro do Sul.
+
+Estribilho (2x)
+Contato! Companheiros!
+Ao vento, sobranceiros,
+Lancemos o roncar
+Da hélice a girar.
+
+III
+Mas se explode o corisco no espaço
+Ou a metralha, na guerra, a rugir,
+Cavaleiros do século do aço,
+Não nos faz o perigo fugir.
+
+IV
+Não importa a tocaia da morte,
+Pois que a Pátria, dos céus no altar,
+Sempre erguemos de ânimo forte,
+O holocausto da vida, a voar.
+
+Estribilho (2x)
+Contato! Companheiros!
+Ao vento, sobranceiros,
+Lancemos o roncar
+Da hélice a girar.`
+    },
+    { 
+        id: '3', 
+        title: '03. Canção da aviação de transporte de tropa', 
+        videoId: '3J1BWb56YXs',
+        lyrics: `[Letra não encontrada - Por favor, insira a letra aqui]`
+    },
+    { 
+        id: '4', 
+        title: '04. Hino da aviação embarcada', 
+        videoId: 'fIjiZ4SRWcU',
+        lyrics: `Salve a Patrulha, Salve a Patrulha!
+O passado distante viu nascer sua história
+Salve a Patrulha, Salve a Patrulha!
+Seus feitos marcantes são flagrantes na memória.
+
+Salve a Patrulha, Salve a Patrulha!
+A Embarcada retrata sua força, sua glória.
+
+Empunhando o tridente mortal,
+Na defesa da Força Naval
+Em vigília constante, protege o mercante e nosso litoral.
+
+Atravessa o oceano, buscando o tirano escondido no fundo...`
+    },
+    { 
+        id: '5', 
+        title: '05. Canção da aviação de caça', 
+        videoId: 'k2bP8UxGDvM',
+        lyrics: `Passei o Carnaval em Veneza
+Levando umas "bombinhas" daqui
+Caprichei bem o meu mergulho
+Foi do barulho, o alvo eu atingi
+BINGO!
+
+A turma de lá atirava
+Atirava sem cessar
+E o pobre "jambock" pulava
+Pulava e gritava sem desanimar
+
+Assim:
+Flak, Flak, esse é de quarenta
+Flak, Flak, tem ponto cinquenta
+Um "bug" aqui, um "bug" lá
+Um "bug" aqui, um "bug" lá
+
+Senta a púa, minha gente
+Que ainda temos que estreifar!
+(2x)`
+    },
+    { 
+        id: '6', 
+        title: '06. Canção do especialista', 
+        videoId: 'ULvyok063eI',
+        lyrics: `Com os pilotos e asas seremos
+Um conjunto de todo eficaz;
+Por mais forte o inimigo não vemos
+Que possamos temê-lo, jamais.
+
+Disciplina, amor e coragem
+É o lema do nosso sucesso.
+Da bandeira da pátria a imagem
+Nos aponta a ordem e o progresso.
+
+Especialistas, avante ao ar
+Para a frente, com garbo varonil
+Agiganta a tua obra sem par;
+Sob o céu deste grande Brasil.
+
+Quer na terra ou nos ares da lida
+Os perigos nos mandam enfrentar
+Nos ufana e sentimos a vida;
+Companheiros, viver é lutar.
+
+Quando passa uma asa altaneira
+Sob o céu, sobre a terra e o mar
+Devorando o espaço, ligeira,
+Nós sentimos orgulho sem par.
+
+Especialistas, avante ao ar
+Para a frente, com garbo varonil
+Agiganta a tua obra sem par;
+Sob o céu deste grande Brasil.`
+    },
+    { 
+        id: '7', 
+        title: '07. Canção do CIAAR', 
+        videoId: 'NhuLs6n62ZY',
+        lyrics: `[Letra não encontrada - Por favor, insira a letra aqui]`
+    },
+    { 
+        id: '8', 
+        title: '08. Canção do expedicionário', 
+        videoId: '4ZKVujE5Ot0',
+        lyrics: `Você sabe de onde eu venho?
+Venho do morro, do Engenho
+Das selvas, dos cafezais,
+Da boa terra do coco,
+Da choupana onde um é pouco,
+Dois é bom, três é demais.
+
+Venho das praias sedosas,
+Das montanhas alterosas,
+Dos pampas, do seringal,
+Das margens crespas dos rios,
+Dos verdes mares bravios
+Da minha terra natal.
+
+Por mais terras que eu percorra,
+Não permita Deus que eu morra
+Sem que volte para lá;
+Sem que leve por divisa
+Esse "V" que simboliza
+A vitória que virá:
+
+Nossa vitória final,
+Que é a mira do meu fuzil,
+A ração do meu bornal,
+A glória do meu Brasil.`
+    },
+    { 
+        id: '9', 
+        title: '09. Canção da infantaria da aeronáutica', 
+        videoId: 'r3lrc1ESfbk',
+        lyrics: `I
+Infantaria, serás sempre altaneira!
+Teus soldados, tu bem sabes escolher;
+Com heroísmo, tu defendes a Bandeira,
+Honrando a Pátria que herdaste ao nascer.
+
+II
+Olhar de frente o inimigo a derrotar,
+Com vigor repelir seu avançar.
+Tu és da Força Aérea Brasileira o fuzil,
+Vigilante, em defesa do Brasil.
+
+Estribilho
+Infantaria a zelar,
+Na guerra ou na paz a lutar.
+Salvaguarda da aviação,
+Infantaria sem temor,
+Em busca da paz, com ardor,
+É o Brasil o teu berço e teu chão.
+
+III
+A decolagem e o pouso velarás,
+Com sucesso, os vetores vão voar.
+Teu braço forte e peito erguido manterás,
+A Deus orando para sempre te olhar.
+
+IV
+E no combate sempre pronta a engajar,
+Muita garra e ímpeto sem par.
+Tu és da Força Aérea Brasileira o fuzil,
+Vigilante, em defesa do Brasil.
+
+(Repete o Estribilho)`
+    }
 ];
 
 // App State
@@ -127,6 +349,12 @@ function openPlayer(song) {
     playerView.classList.add('active');
     
     document.getElementById('current-title').innerText = song.title;
+    
+    const lyricsContainer = document.getElementById('current-lyrics');
+    if (lyricsContainer) {
+        lyricsContainer.innerText = song.lyrics || 'Letra não disponível.';
+    }
+    
     updatePlayerStats();
     setupStars(state.progress[song.id].level);
     
