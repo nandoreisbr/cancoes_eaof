@@ -355,6 +355,34 @@ audio {
     background: var(--gold);
 }
 
+/* Footer */
+.app-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--glass-border);
+    text-align: center;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.app-footer a {
+    color: var(--gold);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.app-footer a:hover {
+    color: #FFF;
+}
+
+.app-footer .disclaimer {
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: #777;
+    font-style: italic;
+}
+
 @media (max-width: 600px) {
     .glass-header {
         flex-direction: column;
