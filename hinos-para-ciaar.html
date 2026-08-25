@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de Canções Militares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            background: #eee;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #005A9C;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>01. Bandeirantes do Ar</h2>
+
+    <div class="video-container">
+        <!-- Incorporação do YouTube -->
+        <iframe src="https://www.youtube.com/embed/Ph7sa65pLxg" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="stats">
+        <span>Vezes assistidas: <strong id="watchCount">0</strong></span>
+        <span>Tempo total: <strong id="totalTime">0 min</strong></span>
+    </div>
+
+    <h3>Nível de Aprendizado:</h3>
+    <div class="controls">
+        <button onclick="setLevel(1)" style="background: #d9534f;">Ainda não sei (1)</button>
+        <button onclick="setLevel(3)" style="background: #f0ad4e;">Mais ou menos (3)</button>
+        <button onclick="setLevel(5)" style="background: #5cb85c;">Decorei (5)</button>
+    </div>
+
+    <h3>Letra:</h3>
+    <div class="lyrics" style="height: 200px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px;">
+        <!-- Cole a letra completa aqui após pesquisar no Google -->
+        [Insira a letra aqui para leitura]
+    </div>
+
+    <script>
+        // Lógica simples usando localStorage
+        let idCancao = "bandeirantes_do_ar";
+
+        // Carrega dados salvos
+        document.getElementById('watchCount').innerText = localStorage.getItem(idCancao + '_views') || 0;
+
+        function setLevel(nivel) {
+            localStorage.setItem(idCancao + '_nivel', nivel);
+            alert("Nível de aprendizado atualizado para " + nivel + "!");
+        }
+
+        // Com a YouTube Player API você automatizaria a contagem de views e tempo ao invés de usar botões manuais.
+    </script>
+</body>
+
+</html>

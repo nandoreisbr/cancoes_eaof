@@ -1,0 +1,263 @@
+:root {
+    --bg-color: #0B132B;
+    --text-color: #FFFFFF;
+    --primary-color: #1C2541;
+    --accent-color: #3A506B;
+    --gold: #FFD700;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: radial-gradient(circle at 50% -20%, #1c2541, #0b132b);
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.glass-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.header-content h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.header-content p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.overall-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-box {
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+}
+
+.stat-box i {
+    color: var(--gold);
+    margin-right: 5px;
+}
+
+/* Views */
+.view {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dashboard */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.filter-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--accent-color);
+    border-color: var(--gold);
+}
+
+.songs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.song-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    border-color: rgba(255,215,0,0.5);
+}
+
+.song-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    padding-right: 20px;
+}
+
+.song-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #bbb;
+}
+
+.level-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--gold);
+    font-weight: 600;
+}
+
+/* Player View */
+.glass-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: 0.3s;
+    font-family: inherit;
+    font-weight: 600;
+}
+
+.glass-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.player-container {
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+#current-title {
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.player-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+}
+
+.rating-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 15px 0;
+    font-size: 2rem;
+}
+
+.stars i {
+    color: #444;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.stars i.active, .stars i:hover {
+    color: var(--gold);
+    transform: scale(1.1);
+}
+
+.stars i.active ~ i:not(:hover) {
+    color: #444;
+}
+
+#rating-text {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+@media (max-width: 600px) {
+    .glass-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}

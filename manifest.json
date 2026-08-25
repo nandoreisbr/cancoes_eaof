@@ -1,0 +1,17 @@
+{
+  "name": "CIAAR Tunes",
+  "short_name": "CIAAR Tunes",
+  "description": "App para memorização das canções militares do CIAAR",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0B132B",
+  "theme_color": "#0B132B",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
