@@ -212,6 +212,67 @@ body {
     height: 100%;
 }
 
+.media-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+}
+
+.media-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.media-btn.active {
+    background: var(--primary-color);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
+.audio-wrapper {
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-wrapper.hidden {
+    display: none;
+}
+
+.video-wrapper.hidden {
+    display: none;
+}
+
+.audio-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.audio-info {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+audio {
+    width: 100%;
+    max-width: 400px;
+    outline: none;
+}
+
 .player-stats {
     display: flex;
     justify-content: space-around;

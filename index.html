@@ -50,9 +50,23 @@
             <button id="back-btn" class="glass-btn"><i class="fa-solid fa-arrow-left"></i> Voltar</button>
             <div class="player-container glass-card">
                 <h2 id="current-title">Título</h2>
-                <div class="video-wrapper">
-                    <div id="yt-player"></div>
+                
+                <div class="media-toggle">
+                    <button id="btn-video" class="media-btn active"><i class="fa-brands fa-youtube"></i> Vídeo</button>
+                    <button id="btn-audio" class="media-btn"><i class="fa-solid fa-music"></i> Áudio MP3</button>
                 </div>
+
+                <div class="media-wrapper">
+                    <div id="video-mode" class="video-wrapper">
+                        <div id="yt-player"></div>
+                    </div>
+                    <div id="audio-mode" class="audio-wrapper hidden">
+                        <i class="fa-solid fa-headphones audio-icon"></i>
+                        <audio id="html-audio-player" controls controlsList="nodownload"></audio>
+                        <p class="audio-info">Modo economia de dados (MP3 local)</p>
+                    </div>
+                </div>
+
                 <div class="player-stats">
                     <p><i class="fa-solid fa-clock"></i> Tempo assistido: <span id="current-time">0m 0s</span></p>
                     <p><i class="fa-solid fa-play"></i> Visualizações: <span id="current-views">0</span></p>
