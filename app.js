@@ -3,7 +3,7 @@ const songsData = [
         id: '1', 
         title: '01. Bandeirantes do ar', 
         videoId: 'Ph7sa65pLxg',
-        audioUrl: 'mp3/01.mp3',
+        audioUrl: 'mp3/01.Bandeirantes-do-ar.mp3',
         lyrics: `I
 A esquadrilha é um punhado de amigos,
 A vibrar, a vibrar de emoção!
@@ -38,7 +38,7 @@ Para defesa do nosso pendão.`
         id: '2', 
         title: '02. Hino dos aviadores', 
         videoId: 'Vmc0QHk6J1w',
-        audioUrl: 'mp3/02.mp3',
+        audioUrl: 'mp3/02.Hino-dos-aviadores.mp3',
         lyrics: `I
 Vamos, filhos altivos dos ares
 Nosso voo ousado alçar,
@@ -79,14 +79,14 @@ Da hélice a girar.`
         id: '3', 
         title: '03. Canção da aviação de transporte de tropa', 
         videoId: '3J1BWb56YXs',
-        audioUrl: 'mp3/03.mp3',
+        audioUrl: 'mp3/03.Cancao-da-aviacao-de-transporte-de-tropa.mp3',
         lyrics: `[Letra não encontrada - Por favor, insira a letra aqui]`
     },
     { 
         id: '4', 
         title: '04. Hino da aviação embarcada', 
         videoId: 'fIjiZ4SRWcU',
-        audioUrl: 'mp3/04.mp3',
+        audioUrl: 'mp3/04.Hino-da-aviação-embarcada.mp3',
         lyrics: `Salve a Patrulha, Salve a Patrulha!
 O passado distante viu nascer sua história
 Salve a Patrulha, Salve a Patrulha!
@@ -105,7 +105,7 @@ Atravessa o oceano, buscando o tirano escondido no fundo...`
         id: '5', 
         title: '05. Canção da aviação de caça', 
         videoId: 'k2bP8UxGDvM',
-        audioUrl: 'mp3/05.mp3',
+        audioUrl: 'mp3/05.Cancao-da-aviacao-de-caca(Adaptada-hinario).mp3',
         lyrics: `Passei o Carnaval em Veneza
 Levando umas "bombinhas" daqui
 Caprichei bem o meu mergulho
@@ -131,7 +131,7 @@ Que ainda temos que estreifar!
         id: '6', 
         title: '06. Canção do especialista', 
         videoId: 'ULvyok063eI',
-        audioUrl: 'mp3/06.mp3',
+        audioUrl: 'mp3/06.Cancao-do-especialista.mp3',
         lyrics: `Com os pilotos e asas seremos
 Um conjunto de todo eficaz;
 Por mais forte o inimigo não vemos
@@ -166,14 +166,14 @@ Sob o céu deste grande Brasil.`
         id: '7', 
         title: '07. Canção do CIAAR', 
         videoId: 'NhuLs6n62ZY',
-        audioUrl: 'mp3/07.mp3',
+        audioUrl: 'mp3/07.Cancao-do-CIAAR.mp3',
         lyrics: `[Letra não encontrada - Por favor, insira a letra aqui]`
     },
     { 
         id: '8', 
         title: '08. Canção do expedicionário', 
         videoId: '4ZKVujE5Ot0',
-        audioUrl: 'mp3/08.mp3',
+        audioUrl: 'mp3/08.Cancao-expedicionario.mp3',
         lyrics: `Você sabe de onde eu venho?
 Venho do morro, do Engenho
 Das selvas, dos cafezais,
@@ -204,7 +204,7 @@ A glória do meu Brasil.`
         id: '9', 
         title: '09. Canção da infantaria da aeronáutica', 
         videoId: 'r3lrc1ESfbk',
-        audioUrl: 'mp3/09.mp3',
+        audioUrl: 'mp3/09.Cancao-da-infantaria-da-aeronautica.mp3',
         lyrics: `I
 Infantaria, serás sempre altaneira!
 Teus soldados, tu bem sabes escolher;
