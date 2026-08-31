@@ -114,6 +114,48 @@ body {
     border-color: var(--gold);
 }
 
+.loop-options {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+}
+
+.loop-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.loop-buttons {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.loop-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-family: inherit;
+    font-size: 0.85rem;
+}
+
+.loop-btn.active, .loop-btn:hover {
+    background: var(--primary-color);
+    border-color: var(--gold);
+    color: var(--gold);
+}
+
 .songs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -193,31 +235,6 @@ body {
 #current-title {
     margin-bottom: 15px;
     font-size: 1.3rem;
-}
-
-.loop-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-}
-
-.glass-select {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-    outline: none;
-}
-
-.glass-select option {
-    background: var(--bg-color);
-    color: white;
 }
 
 .video-wrapper {

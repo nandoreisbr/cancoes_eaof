@@ -528,19 +528,32 @@ const audioMode = document.getElementById('audio-mode');
 const pdfMode = document.getElementById('pdf-mode');
 const htmlAudioPlayer = document.getElementById('html-audio-player');
 const htmlPdfPlayer = document.getElementById('html-pdf-player');
-const loopModeSelect = document.getElementById('loop-mode');
-
 let player;
 let currentSongId = null;
 let watchTimer = null;
 let isPlaying = false;
 let loopMode = localStorage.getItem('ciaar_loop_mode') || 'off';
-loopModeSelect.value = loopMode;
 
-loopModeSelect.addEventListener('change', (e) => {
-    loopMode = e.target.value;
-    localStorage.setItem('ciaar_loop_mode', loopMode);
-    trackEvent('configurou_loop', { modo: loopMode });
+const loopBtns = document.querySelectorAll('.loop-btn');
+
+function updateLoopButtons() {
+    loopBtns.forEach(btn => {
+        if (btn.getAttribute('data-loop') === loopMode) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+updateLoopButtons();
+
+loopBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        loopMode = e.target.getAttribute('data-loop');
+        localStorage.setItem('ciaar_loop_mode', loopMode);
+        updateLoopButtons();
+        trackEvent('configurou_loop', { modo: loopMode });
+    });
 });
 
 // Format Time
