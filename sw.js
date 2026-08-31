@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ciaar-tunes-v2';
+const CACHE_NAME = 'ciaar-tunes-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -13,7 +13,6 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   );
-  // Force the waiting service worker to become the active service worker.
   self.skipWaiting();
 });
 
@@ -29,18 +28,27 @@ self.addEventListener('activate', event => {
       );
     })
   );
-  // Claim all clients immediately so the new cache is used.
   self.clients.claim();
 });
 
+// Estratégia Network-First (Rede primeiro, Cache como fallback)
 self.addEventListener('fetch', event => {
+  // Apenas para requisições GET
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
+        // Se a rede responder com sucesso, atualiza o cache
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseClone);
+        });
+        return response;
+      })
+      .catch(() => {
+        // Se falhar (offline), busca no cache
+        return caches.match(event.request);
       })
   );
 });
