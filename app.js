@@ -253,7 +253,7 @@ Sob o céu deste grande Brasil.`
     },
     {
         id: '7',
-        title: '07. Canção do CIAAR',
+        title: 'Canção do CIAAR',
         videoId: 'NhuLs6n62ZY',
         audioUrl: 'mp3/07.Cancao-do-CIAAR.mp3',
         pdfUrl: 'pdf/07.Cancao-do-CIAAR.pdf',
@@ -285,7 +285,7 @@ Que é preciso ter fé na missão.`
     },
     {
         id: '8',
-        title: '08. Canção do expedicionário',
+        title: 'Canção do expedicionário',
         videoId: '4ZKVujE5Ot0',
         audioUrl: 'mp3/08.Cancao-expedicionario.mp3',
         pdfUrl: 'pdf/08.Cancao-expedicionario.pdf',
@@ -397,7 +397,7 @@ A glória do meu Brasil`
     },
     {
         id: '9',
-        title: '09. Canção da infantaria da aeronáutica',
+        title: 'Canção da infantaria da aeronáutica',
         videoId: 'r3lrc1ESfbk',
         audioUrl: 'mp3/09.Cancao-da-infantaria-da-aeronautica.mp3',
         pdfUrl: 'pdf/09.Cancao-da-infantaria-da-aeronautica.pdf',
@@ -441,7 +441,7 @@ Em busca da paz, com ardor
     },
     {
         id: '10',
-        title: '10. Canção aviação busca salvamento',
+        title: 'Canção aviação busca salvamento',
         videoId: 'l5s8ZvEFVfQ',
         audioUrl: 'mp3/10.Cancao_aviacao_busca_salvamento.mp3',
         pdfUrl: 'pdf/10.Cancao_aviacao_busca_salvamento.pdf',
@@ -528,11 +528,20 @@ const audioMode = document.getElementById('audio-mode');
 const pdfMode = document.getElementById('pdf-mode');
 const htmlAudioPlayer = document.getElementById('html-audio-player');
 const htmlPdfPlayer = document.getElementById('html-pdf-player');
+const loopModeSelect = document.getElementById('loop-mode');
 
 let player;
 let currentSongId = null;
 let watchTimer = null;
 let isPlaying = false;
+let loopMode = localStorage.getItem('ciaar_loop_mode') || 'off';
+loopModeSelect.value = loopMode;
+
+loopModeSelect.addEventListener('change', (e) => {
+    loopMode = e.target.value;
+    localStorage.setItem('ciaar_loop_mode', loopMode);
+    trackEvent('configurou_loop', { modo: loopMode });
+});
 
 // Format Time
 function formatTime(seconds) {
@@ -616,7 +625,7 @@ window.onYouTubeIframeAPIReady = function () {
     console.log("YouTube API Ready");
 }
 
-function openPlayer(song) {
+function openPlayer(song, autoplay = false) {
     currentSongId = song.id;
     dashboardView.classList.remove('active');
     playerView.classList.add('active');
@@ -643,19 +652,32 @@ function openPlayer(song) {
 
     updatePlayerStats();
     setupStars(state.progress[song.id].level);
-    switchToVideoMode();
+    
+    const isAudio = btnAudio.classList.contains('active');
+    const isPdf = btnPdf.classList.contains('active');
 
-    if (player) {
-        player.loadVideoById(song.videoId);
+    if (isPdf) {
+        switchToPdfMode();
+    } else if (isAudio) {
+        switchToAudioMode();
+        // Em navegadores modernos, play() só funciona se o usuário interagiu.
+        if (htmlAudioPlayer && autoplay) {
+            htmlAudioPlayer.play().catch(e => console.log('Autoplay bloqueado', e));
+        }
     } else {
-        player = new YT.Player('yt-player', {
-            height: '100%',
-            width: '100%',
-            videoId: song.videoId,
-            events: {
-                'onStateChange': onPlayerStateChange
-            }
-        });
+        switchToVideoMode();
+        if (player) {
+            player.loadVideoById(song.videoId); // Isto faz autoplay por padrão.
+        } else {
+            player = new YT.Player('yt-player', {
+                height: '100%',
+                width: '100%',
+                videoId: song.videoId,
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
     }
 }
 
@@ -679,8 +701,9 @@ function onPlayerStateChange(event) {
                 state.progress[currentSongId].watchCount += 1;
                 saveState();
                 updatePlayerStats();
-                
+
                 trackEvent('musica_concluida', { song_id: currentSongId, formato: 'video' });
+                playNextSong();
             }
         }
     }
@@ -716,6 +739,25 @@ document.getElementById('back-btn').addEventListener('click', () => {
     dashboardView.classList.add('active');
     renderDashboard();
 });
+
+function playNextSong() {
+    if (loopMode === 'off') return;
+
+    let nextIndex = 0;
+    const currentIndex = songsData.findIndex(s => s.id === currentSongId);
+    
+    if (loopMode === 'normal') {
+        nextIndex = (currentIndex + 1) % songsData.length;
+    } else if (loopMode === 'random') {
+        nextIndex = Math.floor(Math.random() * songsData.length);
+        if (songsData.length > 1 && nextIndex === currentIndex) {
+            nextIndex = (nextIndex + 1) % songsData.length;
+        }
+    }
+    
+    // Play with autoplay = true
+    openPlayer(songsData[nextIndex], true);
+}
 
 // Audio & Video & PDF Toggle Logic
 btnVideo.addEventListener('click', () => {
@@ -789,6 +831,7 @@ if (htmlAudioPlayer) {
             updatePlayerStats();
 
             trackEvent('musica_concluida', { song_id: currentSongId, formato: 'audio' });
+            playNextSong();
         }
     });
 }
