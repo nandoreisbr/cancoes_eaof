@@ -255,6 +255,24 @@ body {
     display: none;
 }
 
+.pdf-wrapper {
+    position: relative;
+    height: 600px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e0e0e0;
+}
+
+.pdf-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.pdf-wrapper.hidden {
+    display: none;
+}
+
 .audio-icon {
     font-size: 3rem;
     color: var(--accent-color);

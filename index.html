@@ -64,6 +64,7 @@
                 <div class="media-toggle">
                     <button id="btn-video" class="media-btn active"><i class="fa-brands fa-youtube"></i> Vídeo</button>
                     <button id="btn-audio" class="media-btn"><i class="fa-solid fa-music"></i> Áudio MP3</button>
+                    <button id="btn-pdf" class="media-btn"><i class="fa-solid fa-file-pdf"></i> PDF</button>
                 </div>
 
                 <div class="media-wrapper">
@@ -74,6 +75,9 @@
                         <i class="fa-solid fa-headphones audio-icon"></i>
                         <audio id="html-audio-player" controls controlsList="nodownload"></audio>
                         <p class="audio-info">Modo economia de dados (MP3 local)</p>
+                    </div>
+                    <div id="pdf-mode" class="pdf-wrapper hidden">
+                        <iframe id="html-pdf-player" src=""></iframe>
                     </div>
                 </div>
 
