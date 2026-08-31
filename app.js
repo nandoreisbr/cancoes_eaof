@@ -484,6 +484,13 @@ Para que outros possam viver`
     }
 ];
 
+// Analytics Helper
+function trackEvent(eventName, params = {}) {
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, params);
+    }
+}
+
 // App State
 let state = {
     progress: JSON.parse(localStorage.getItem('ciaar_progress')) || {},
@@ -594,8 +601,13 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
-        state.currentSort = e.target.getAttribute('data-sort');
+        const sortType = e.target.getAttribute('data-sort');
+        state.currentSort = sortType;
         renderDashboard();
+
+        trackEvent('filtro_dashboard', {
+            tipo_filtro: sortType
+        });
     });
 });
 
@@ -610,6 +622,11 @@ function openPlayer(song) {
     playerView.classList.add('active');
 
     document.getElementById('current-title').innerText = song.title;
+
+    trackEvent('abrir_musica', {
+        song_id: song.id,
+        song_title: song.title
+    });
 
     const lyricsContainer = document.getElementById('current-lyrics');
     if (lyricsContainer) {
@@ -662,6 +679,8 @@ function onPlayerStateChange(event) {
                 state.progress[currentSongId].watchCount += 1;
                 saveState();
                 updatePlayerStats();
+                
+                trackEvent('musica_concluida', { song_id: currentSongId, formato: 'video' });
             }
         }
     }
@@ -699,9 +718,18 @@ document.getElementById('back-btn').addEventListener('click', () => {
 });
 
 // Audio & Video & PDF Toggle Logic
-btnVideo.addEventListener('click', switchToVideoMode);
-btnAudio.addEventListener('click', switchToAudioMode);
-btnPdf.addEventListener('click', switchToPdfMode);
+btnVideo.addEventListener('click', () => {
+    switchToVideoMode();
+    if (currentSongId) trackEvent('formato_escolhido', { song_id: currentSongId, formato: 'video' });
+});
+btnAudio.addEventListener('click', () => {
+    switchToAudioMode();
+    if (currentSongId) trackEvent('formato_escolhido', { song_id: currentSongId, formato: 'audio' });
+});
+btnPdf.addEventListener('click', () => {
+    switchToPdfMode();
+    if (currentSongId) trackEvent('formato_escolhido', { song_id: currentSongId, formato: 'pdf' });
+});
 
 function switchToVideoMode() {
     btnVideo.classList.add('active');
@@ -759,6 +787,8 @@ if (htmlAudioPlayer) {
             state.progress[currentSongId].watchCount += 1;
             saveState();
             updatePlayerStats();
+
+            trackEvent('musica_concluida', { song_id: currentSongId, formato: 'audio' });
         }
     });
 }
@@ -799,6 +829,11 @@ stars.forEach(star => {
             saveState();
             setupStars(val);
             renderDashboard(); // Update dashboard in background
+
+            trackEvent('evolucao_musica', {
+                song_id: currentSongId,
+                novo_nivel: val
+            });
         }
     });
 });
