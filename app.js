@@ -533,6 +533,7 @@ let currentSongId = null;
 let watchTimer = null;
 let isPlaying = false;
 let loopMode = localStorage.getItem('ciaar_loop_mode') || 'off';
+let shuffledIndices = [];
 
 const loopBtns = document.querySelectorAll('.loop-btn');
 
@@ -551,6 +552,7 @@ loopBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         loopMode = e.target.getAttribute('data-loop');
         localStorage.setItem('ciaar_loop_mode', loopMode);
+        shuffledIndices = []; // Reseta a lista embaralhada ao mudar o modo
         updateLoopButtons();
         trackEvent('configurou_loop', { modo: loopMode });
     });
@@ -762,10 +764,26 @@ function playNextSong() {
     if (loopMode === 'normal') {
         nextIndex = (currentIndex + 1) % songsData.length;
     } else if (loopMode === 'random') {
-        nextIndex = Math.floor(Math.random() * songsData.length);
-        if (songsData.length > 1 && nextIndex === currentIndex) {
-            nextIndex = (nextIndex + 1) % songsData.length;
+        if (shuffledIndices.length === 0) {
+            // Preenche a lista com todos os índices disponíveis
+            shuffledIndices = songsData.map((_, i) => i);
+            // Embaralha usando o algoritmo Fisher-Yates
+            for (let i = shuffledIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledIndices[i], shuffledIndices[j]] = [shuffledIndices[j], shuffledIndices[i]];
+            }
+            
+            // Se ao re-embaralhar, a primeira música for a mesma que acabou de tocar,
+            // trocamos com a segunda para evitar repetição imediata (se houver mais de uma).
+            if (shuffledIndices.length > 1 && shuffledIndices[0] === currentIndex) {
+                const temp = shuffledIndices[0];
+                shuffledIndices[0] = shuffledIndices[1];
+                shuffledIndices[1] = temp;
+            }
         }
+        
+        // Remove e pega o próximo índice da lista embaralhada
+        nextIndex = shuffledIndices.shift();
     }
     
     // Play with autoplay = true
