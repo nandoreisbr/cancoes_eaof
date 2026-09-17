@@ -1,7 +1,7 @@
 const songsData = [
     {
         id: '1',
-        title: 'Canção Bandeirantes do Ar',
+        title: 'Canção dos Bandeirantes do Ar',
         videoId: 'Ph7sa65pLxg',
         audioUrl: 'mp3/01.Bandeirantes-do-ar.mp3',
         pdfUrl: 'pdf/01.Bandeirantes-do-ar.pdf',
@@ -47,7 +47,7 @@ Pela bandeira do Brasil
     },
     {
         id: '2',
-        title: 'Canção Hino dos Aviadores',
+        title: 'Hino dos Aviadores',
         videoId: 'Vmc0QHk6J1w',
         audioUrl: 'mp3/02.Hino-dos-aviadores.mp3',
         pdfUrl: 'pdf/02.Hino-dos-aviadores.pdf',
@@ -89,7 +89,7 @@ Da hélice a girar.`
     },
     {
         id: '3',
-        title: 'Canção AVIAÇÃO DE TRANSPORTE',
+        title: 'Canção da Aviação de Transporte',
         videoId: '3J1BWb56YXs',
         audioUrl: 'mp3/03.Cancao-da-aviacao-de-transporte-de-tropa.mp3',
         pdfUrl: 'pdf/03.Cancao-da-aviacao-de-transporte-de-tropa.pdf',
@@ -110,7 +110,7 @@ Nossa sagrada missão`
     },
     {
         id: '4',
-        title: 'Canção DA Aviação Embarcada',
+        title: 'Canção da Aviação Embarcada',
         videoId: 'fIjiZ4SRWcU',
         audioUrl: 'mp3/04.Hino-da-aviação-embarcada.mp3',
         pdfUrl: 'pdf/04.Hino-da-aviação-embarcada.pdf',
@@ -163,7 +163,7 @@ Na busca implacável ao submarino.`
     },
     {
         id: '5',
-        title: 'Canção daAviação de Caça',
+        title: 'Canção da Aviação de Caça',
         videoId: 'k2bP8UxGDvM',
         audioUrl: 'mp3/05.Cancao-da-aviacao-de-caca.mp3',
         pdfUrl: 'pdf/05.Cancao-da-aviacao-de-caca.pdf',
@@ -217,7 +217,7 @@ Que ainda temos que Estreifar`
     },
     {
         id: '6',
-        title: 'CANÇÃO - ESPECIALISTA DA AERONÁUTICA',
+        title: 'Canção do Especialista da Aeronáutica',
         videoId: 'ULvyok063eI',
         audioUrl: 'mp3/06.Cancao-do-especialista.mp3',
         pdfUrl: 'pdf/06.Cancao-do-especialista.pdf',
@@ -285,7 +285,7 @@ Que é preciso ter fé na missão.`
     },
     {
         id: '8',
-        title: 'Canção do expedicionário',
+        title: 'Canção do Expedicionário',
         videoId: '4ZKVujE5Ot0',
         audioUrl: 'mp3/08.Cancao-expedicionario.mp3',
         pdfUrl: 'pdf/08.Cancao-expedicionario.pdf',
@@ -397,7 +397,7 @@ A glória do meu Brasil`
     },
     {
         id: '9',
-        title: 'Canção da infantaria da aeronáutica',
+        title: 'Canção da Infantaria da Aeronáutica',
         videoId: 'r3lrc1ESfbk',
         audioUrl: 'mp3/09.Cancao-da-infantaria-da-aeronautica.mp3',
         pdfUrl: 'pdf/09.Cancao-da-infantaria-da-aeronautica.pdf',
@@ -441,7 +441,7 @@ Em busca da paz, com ardor
     },
     {
         id: '10',
-        title: 'Canção aviação busca salvamento',
+        title: 'Canção da Aviação de Busca e Salvamento',
         videoId: 'l5s8ZvEFVfQ',
         audioUrl: 'mp3/10.Cancao_aviacao_busca_salvamento.mp3',
         pdfUrl: 'pdf/10.Cancao_aviacao_busca_salvamento.pdf',
@@ -483,6 +483,10 @@ E o perigo jamais conhecer
 Para que outros possam viver`
     }
 ];
+
+// Reorder songsData to the predefined sequence
+const baseOrder = ['1', '3', '4', '5', '10', '8', '9', '6', '2', '7'];
+songsData.sort((a, b) => baseOrder.indexOf(a.id) - baseOrder.indexOf(b.id));
 
 // Analytics Helper
 function trackEvent(eventName, params = {}) {
@@ -586,7 +590,16 @@ function renderDashboard() {
 
     let displaySongs = [...songsData];
 
-    if (state.currentSort === 'level') {
+    if (state.currentSort === 'default') {
+        const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
+        const today = new Date();
+        const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        let offset = diffDays % displaySongs.length;
+        if (offset < 0) offset += displaySongs.length;
+        
+        displaySongs = [...displaySongs.slice(offset), ...displaySongs.slice(0, offset)];
+    } else if (state.currentSort === 'level') {
         // Sort by level ascending (0 or 1 first)
         displaySongs.sort((a, b) => state.progress[a.id].level - state.progress[b.id].level);
     } else if (state.currentSort === 'views') {
