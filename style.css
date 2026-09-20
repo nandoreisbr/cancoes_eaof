@@ -42,6 +42,21 @@ body {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.audax-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
 .header-content h1 {
     font-size: 1.8rem;
     font-weight: 800;
@@ -88,6 +103,28 @@ body {
 }
 
 /* Dashboard */
+.battle-cry {
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 16px;
+    text-align: center;
+    color: #e0e0e0;
+}
+
+.battle-cry h3 {
+    color: var(--gold);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.battle-cry p {
+    line-height: 1.6;
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: italic;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
 .filters {
     display: flex;
     gap: 10px;
