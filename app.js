@@ -614,8 +614,38 @@ function renderDashboard() {
             starsHtml = `<i class="fa-regular fa-star"></i> -`;
         }
 
+        let dateHtml = '';
+        if (state.currentSort === 'default') {
+            const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
+            const i = baseOrder.indexOf(song.id);
+            
+            let currentCycleStartOffset = diffDays - (diffDays % 10);
+            if (diffDays < 0) currentCycleStartOffset = 0;
+            
+            let executionDate = new Date(2026, 8, 17);
+            executionDate.setDate(executionDate.getDate() + currentCycleStartOffset + i);
+            executionDate.setHours(0, 0, 0, 0);
+            
+            if (executionDate < today) {
+                executionDate.setDate(executionDate.getDate() + 10);
+            }
+            
+            const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const dayName = daysOfWeek[executionDate.getDay()];
+            const formattedDate = `${String(executionDate.getDate()).padStart(2, '0')}/${String(executionDate.getMonth() + 1).padStart(2, '0')} - ${dayName}`;
+            
+            dateHtml = `<div class="song-date"><i class="fa-regular fa-calendar"></i> ${formattedDate}</div>`;
+        }
+
         card.innerHTML = `
             <div class="level-indicator">${starsHtml}</div>
+            ${dateHtml}
             <div class="song-title">${song.title}</div>
             <div class="song-meta">
                 <span><i class="fa-solid fa-play"></i> ${prog.watchCount}x</span>
