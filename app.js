@@ -536,7 +536,7 @@ let player;
 let currentSongId = null;
 let watchTimer = null;
 let isPlaying = false;
-let loopMode = localStorage.getItem('ciaar_loop_mode') || 'off';
+let loopMode = localStorage.getItem('ciaar_loop_mode') || 'single';
 let shuffledIndices = [];
 
 const loopBtns = document.querySelectorAll('.loop-btn');
@@ -591,14 +591,7 @@ function renderDashboard() {
     let displaySongs = [...songsData];
 
     if (state.currentSort === 'default') {
-        const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
-        const today = new Date();
-        const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        let offset = diffDays % displaySongs.length;
-        if (offset < 0) offset += displaySongs.length;
-        
-        displaySongs = [...displaySongs.slice(offset), ...displaySongs.slice(0, offset)];
+        // Mantém a ordem padrão (cronológica) definida em baseOrder
     } else if (state.currentSort === 'level') {
         // Sort by level ascending (0 or 1 first)
         displaySongs.sort((a, b) => state.progress[a.id].level - state.progress[b.id].level);
@@ -774,7 +767,9 @@ function playNextSong() {
     let nextIndex = 0;
     const currentIndex = songsData.findIndex(s => s.id === currentSongId);
     
-    if (loopMode === 'normal') {
+    if (loopMode === 'single') {
+        nextIndex = currentIndex;
+    } else if (loopMode === 'normal') {
         nextIndex = (currentIndex + 1) % songsData.length;
     } else if (loopMode === 'random') {
         if (shuffledIndices.length === 0) {
