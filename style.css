@@ -34,27 +34,25 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 20px;
+    padding: 30px 20px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 15px;
     margin-bottom: 30px;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
 .audax-logo {
-    width: 120px;
-    height: 120px;
+    width: 20%;
+    min-width: 120px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid var(--gold);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    border: 3px solid var(--gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+    margin-bottom: 5px;
 }
 
 .header-content h1 {
