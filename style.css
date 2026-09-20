@@ -45,14 +45,13 @@ body {
 }
 
 .audax-logo {
-    width: 20%;
-    min-width: 120px;
-    aspect-ratio: 1 / 1;
+    width: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--gold);
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .header-content h1 {
