@@ -484,8 +484,8 @@ Para que outros possam viver`
     }
 ];
 
-// Reorder songsData to the predefined sequence
-const baseOrder = ['1', '3', '4', '5', '10', '8', '9', '6', '2', '7'];
+// Reorder songsData to the predefined sequence (mantendo ordem de id no momento)
+const baseOrder = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 songsData.sort((a, b) => baseOrder.indexOf(a.id) - baseOrder.indexOf(b.id));
 
 // Analytics Helper
@@ -591,6 +591,8 @@ function renderDashboard() {
     let displaySongs = [...songsData];
 
     if (state.currentSort === 'default') {
+        /* 
+        // Aguardando nova lista com datas:
         const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
         const today = new Date();
         const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
@@ -599,6 +601,7 @@ function renderDashboard() {
         if (offset < 0) offset += displaySongs.length;
         
         displaySongs = [...displaySongs.slice(offset), ...displaySongs.slice(0, offset)];
+        */
     } else if (state.currentSort === 'level') {
         // Sort by level ascending (0 or 1 first)
         displaySongs.sort((a, b) => state.progress[a.id].level - state.progress[b.id].level);
@@ -623,6 +626,8 @@ function renderDashboard() {
 
         let dateHtml = '';
         if (state.currentSort === 'default') {
+            /*
+            // Aguardando nova lista com datas:
             const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -648,6 +653,7 @@ function renderDashboard() {
             const formattedDate = `${String(executionDate.getDate()).padStart(2, '0')}/${String(executionDate.getMonth() + 1).padStart(2, '0')} - ${dayName}`;
             
             dateHtml = `<div class="song-date"><i class="fa-regular fa-calendar"></i> ${formattedDate}</div>`;
+            */
         }
 
         card.innerHTML = `
