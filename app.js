@@ -584,6 +584,23 @@ function updateOverallStats() {
     totalViewsEl.innerText = totalViews;
 }
 
+function getWeekdaysDiff(start, end) {
+    let d1 = new Date(start);
+    let d2 = new Date(end);
+    let isNegative = d1 > d2;
+    if (isNegative) {
+        let temp = d1; d1 = d2; d2 = temp;
+    }
+    let days = 0;
+    while (d1 < d2) {
+        d1.setDate(d1.getDate() + 1);
+        if (d1.getDay() !== 0 && d1.getDay() !== 6) {
+            days++;
+        }
+    }
+    return isNegative ? -days : days;
+}
+
 // Render Dashboard
 function renderDashboard() {
     songsList.innerHTML = '';
@@ -591,17 +608,19 @@ function renderDashboard() {
     let displaySongs = [...songsData];
 
     if (state.currentSort === 'default') {
-        /* 
-        // Aguardando nova lista com datas:
-        const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
+        const baseDate = new Date(2026, 9, 1); // 01/10/2026
         const today = new Date();
-        const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        let offset = diffDays % displaySongs.length;
-        if (offset < 0) offset += displaySongs.length;
+        today.setHours(0, 0, 0, 0);
+
+        const diffWeekDays = getWeekdaysDiff(baseDate, today);
+        const songSequence = ['6', '7', '2', '1', '3', '4', '5', '10', '8', '9'];
         
-        displaySongs = [...displaySongs.slice(offset), ...displaySongs.slice(0, offset)];
-        */
+        let startIndex = diffWeekDays % songSequence.length;
+        if (startIndex < 0) startIndex += songSequence.length;
+
+        const currentSequence = [...songSequence.slice(startIndex), ...songSequence.slice(0, startIndex)];
+        
+        displaySongs.sort((a, b) => currentSequence.indexOf(a.id) - currentSequence.indexOf(b.id));
     } else if (state.currentSort === 'level') {
         // Sort by level ascending (0 or 1 first)
         displaySongs.sort((a, b) => state.progress[a.id].level - state.progress[b.id].level);
@@ -610,7 +629,7 @@ function renderDashboard() {
         displaySongs.sort((a, b) => state.progress[b.id].watchCount - state.progress[a.id].watchCount);
     }
 
-    displaySongs.forEach(song => {
+    displaySongs.forEach((song, index) => {
         const prog = state.progress[song.id];
 
         const card = document.createElement('div');
@@ -626,34 +645,30 @@ function renderDashboard() {
 
         let dateHtml = '';
         if (state.currentSort === 'default') {
-            /*
-            // Aguardando nova lista com datas:
-            const baseDate = new Date(2026, 8, 17); // Sept 17, 2026
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
             
-            const diffTime = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate());
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            let executionDate = new Date(todayDate);
+            if (executionDate.getDay() === 6) executionDate.setDate(executionDate.getDate() - 1); // Se sábado, volta pra sexta
+            if (executionDate.getDay() === 0) executionDate.setDate(executionDate.getDate() - 2); // Se domingo, volta pra sexta
             
-            const i = baseOrder.indexOf(song.id);
-            
-            let currentCycleStartOffset = diffDays - (diffDays % 10);
-            if (diffDays < 0) currentCycleStartOffset = 0;
-            
-            let executionDate = new Date(2026, 8, 17);
-            executionDate.setDate(executionDate.getDate() + currentCycleStartOffset + i);
-            executionDate.setHours(0, 0, 0, 0);
-            
-            if (executionDate < today) {
-                executionDate.setDate(executionDate.getDate() + 10);
+            let addedDays = 0;
+            while (addedDays < index) {
+                executionDate.setDate(executionDate.getDate() + 1);
+                if (executionDate.getDay() !== 0 && executionDate.getDay() !== 6) {
+                    addedDays++;
+                }
             }
             
             const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
             const dayName = daysOfWeek[executionDate.getDay()];
             const formattedDate = `${String(executionDate.getDate()).padStart(2, '0')}/${String(executionDate.getMonth() + 1).padStart(2, '0')} - ${dayName}`;
             
-            dateHtml = `<div class="song-date"><i class="fa-regular fa-calendar"></i> ${formattedDate}</div>`;
-            */
+            const isToday = index === 0;
+            const dateStyle = isToday ? 'style="color: var(--gold); font-weight: bold;"' : '';
+            const icon = isToday ? '<i class="fa-solid fa-calendar-day"></i>' : '<i class="fa-regular fa-calendar"></i>';
+            
+            dateHtml = `<div class="song-date" ${dateStyle}>${icon} ${formattedDate}</div>`;
         }
 
         card.innerHTML = `
