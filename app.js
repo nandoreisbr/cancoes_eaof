@@ -608,6 +608,8 @@ function renderDashboard() {
     let displaySongs = [...songsData];
 
     if (state.currentSort === 'default') {
+        /*
+        // Aguardando nova lista com datas:
         const baseDate = new Date(2026, 9, 1); // 01/10/2026
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -621,6 +623,7 @@ function renderDashboard() {
         const currentSequence = [...songSequence.slice(startIndex), ...songSequence.slice(0, startIndex)];
         
         displaySongs.sort((a, b) => currentSequence.indexOf(a.id) - currentSequence.indexOf(b.id));
+        */
     } else if (state.currentSort === 'level') {
         // Sort by level ascending (0 or 1 first)
         displaySongs.sort((a, b) => state.progress[a.id].level - state.progress[b.id].level);
@@ -645,6 +648,8 @@ function renderDashboard() {
 
         let dateHtml = '';
         if (state.currentSort === 'default') {
+            /*
+            // Aguardando nova lista com datas:
             const todayDate = new Date();
             todayDate.setHours(0, 0, 0, 0);
             
@@ -669,6 +674,7 @@ function renderDashboard() {
             const icon = isToday ? '<i class="fa-solid fa-calendar-day"></i>' : '<i class="fa-regular fa-calendar"></i>';
             
             dateHtml = `<div class="song-date" ${dateStyle}>${icon} ${formattedDate}</div>`;
+            */
         }
 
         card.innerHTML = `
